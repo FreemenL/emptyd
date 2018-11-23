@@ -1,10 +1,3 @@
-<p align="center">
-  <a href="https://github.com/FreemenL/emptyd">
-    <img width="230" src="https://avatars3.githubusercontent.com/u/23741346?s=400&u=75096daa89916a123bd9f18f3f76768dad27188a&v=4">
-  </a>
-</p>
-
-
 # empty-design 简称 emptyd
 
 `emptyd` 是基于`react + antd`的扩展组件库，主要包括`通用小组件`、`快速开发页面的多风格模板(HOC高阶组件)`、`通用工具函数`、`通用样式类`
