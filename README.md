@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/FreemenL/emptyd">
-    <img width="230" src="https://raw.githubusercontent.com/FreemenL/virtualDOM/master/public/favicon.ico" style="border-radius:20px">
+    <img width="230" src="https://avatars3.githubusercontent.com/u/23741346?s=400&u=75096daa89916a123bd9f18f3f76768dad27188a&v=4">
   </a>
 </p>
 
