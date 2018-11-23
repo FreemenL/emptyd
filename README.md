@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://ant.design">
-    <img width="230" src="https://raw.githubusercontent.com/FreemenL/virtualDOM/master/public/favicon.ico">
+    <img width="230" src="https://raw.githubusercontent.com/FreemenL/virtualDOM/master/public/favicon.ico" style="border-radius:20px">
   </a>
 </p>
 # empty-design 简称 emptyd
