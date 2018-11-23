@@ -23,3 +23,9 @@
 
 7、支持使用 `less` 变量自定义 `antd` 的主题
 
+## Install
+
+```bash
+npm install emptyd -S
+cnpm install emptyd -S
+```
