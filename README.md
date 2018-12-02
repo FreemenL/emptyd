@@ -11,7 +11,7 @@
 
 1、支持基本的图片文件 `png|jpe?g|gif|svg` 加载,转 base64 打包
 
-2、支持 `js,jsx,css,less` 公共代码抽取，压缩打包
+2、支持 `ts,tsx,css,less` 公共代码抽取，压缩打包
 
 3、`babel-loader + less` 模块加载功能
 
