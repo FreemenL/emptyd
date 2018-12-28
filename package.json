@@ -1,6 +1,6 @@
 {
   "name": "emptyd",
-  "version": "0.0.7",
+  "version": "0.1.2",
   "description": "react+antd+typescript",
   "main": "./loadComponent.tsx",
   "scripts": {
@@ -19,6 +19,6 @@
     "url": "https://github.com/FreemenL/emptyd/issues"
   },
   "homepage": "https://github.com/FreemenL/emptyd#readme",
-  "_from": "emptyd@0.0.7",
-  "_resolved": "http://registry.npm.taobao.org/emptyd/download/emptyd-0.0.7.tgz"
+  "_from": "emptyd@0.1.2",
+  "_resolved": "http://registry.npm.taobao.org/emptyd/download/emptyd-0.0.8.tgz"
 }

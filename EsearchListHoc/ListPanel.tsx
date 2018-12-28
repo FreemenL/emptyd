@@ -16,6 +16,7 @@ interface Props{
 class ListPanel extends Component<Props,any>{
 	constructor(props){
 		super(props);
+		console.log(this.props.state);
 	}
 	state = { 
 		visible: false ,
@@ -24,6 +25,10 @@ class ListPanel extends Component<Props,any>{
 		placement:"right",
 		modalVisibale:false,
 	};
+
+	componentDidMount(){
+	    const Ele:any = document.getElementById('editNode');
+	}
 
 	shouldComponentUpdate(nextProps,nextState){
 		if(this.state.visible!==nextState.visible||this.state.modalVisibale!==nextState.modalVisibale){
@@ -55,15 +60,12 @@ class ListPanel extends Component<Props,any>{
 	}
 	handleClose(){
 		this.setState((prevState,props)=>{
-			return{
+			return {
 				visible:false
 			}
 		})
 	}
-	componentDidMount(){
-	    const Ele:any = document.getElementById('editNode');
-	    
-	}
+	
 	handleListAdd(){
 		this.setState((prevState,props)=>{
           return{
@@ -111,7 +113,7 @@ class ListPanel extends Component<Props,any>{
 		  	<EDrawer.component {...EDprops}>
 		  		{renderContext[this.state.handle]}
 		  	</EDrawer.component>
-		  	<span id="listAdd" onClick={this.handleListAdd} style={{visibility:"hidden"}}>111</span>
+		  	<span id="listAdd" onClick={this.handleListAdd} style={{visibility:"hidden"}}></span>
 		  	<Modal {...modalConfig}>
 		  		<AddNode/>
 		  	</Modal>

@@ -33,11 +33,11 @@ class EDrawer extends React.Component<any,any>{
 	return(
 		<Drawer
 	        title={<Tag color="#87d068" >{title}</Tag>}
-	        placement={placement}
-	        closable={closable}
-	        onClose={onClose}
-	        visible={visible}
-	        className={EDrawerClassNames}
+	        placement={ placement }
+	        closable={ closable }
+	        onClose={ onClose }
+	        visible={ visible }
+	        className={ EDrawerClassNames }
 	        destroyOnClose
 	       >
 	      <Icon type={arrowIcon[placement]} className={hideBtn} onClick={onClose}/>

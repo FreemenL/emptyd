@@ -1,7 +1,28 @@
 import React,{ Component }from 'react';
-import { Row, Col } from 'antd'; 
+import { Row, Col ,Tooltip } from 'antd'; 
 import { tool } from '../utils/utils';
 import styles from './index.less';
+
+/**
+ * [EListHoc description]
+ * @Author   freemenL
+ * @param    {[type]}                 data                       []
+ * @param    {[type]}                 Effect?:any [自定义组件]
+ *
+ *用例： 
+ *return EListHoc({
+	"班次名称":"name",
+	"所属部门":"deptName",
+	"班次类型":"dutyType",
+	"上班时间":"startTime",
+	"下班时间":"endTime",
+	"上班打卡时间范围":"onRange",
+	"下班打卡时间范围":"offRange",
+	"午休时间":"duration"
+},Test)
+ *
+ * 
+ */
 
 const { transData } = tool;
 function EListHoc(data,Effect?:any){
@@ -20,7 +41,9 @@ function EListHoc(data,Effect?:any){
 		      	          		return(
 			      	          		<div key={`${indexs}`}>
 				      	          		<span>{Object.keys(items)[0]}</span>
-				      	          		<span>{Object.values(items)[0]}</span>
+				      	          		<Tooltip placement="right" title={Object.values(items)[0]}>
+									        <span>{Object.values(items)[0]}</span>
+									    </Tooltip>
 				      	          	</div>
 		      	          		)
 		      	          	})}
@@ -28,7 +51,7 @@ function EListHoc(data,Effect?:any){
 		          	)
 		          })}
 		        </Row>
-		        {Effect&&<Effect/>}
+		        {Effect&&<Effect params={params}/>}
 			</section>
 		)
 	}
@@ -38,3 +61,5 @@ export default{
 	name:"EListHoc",
 	component:EListHoc
 }
+
+

@@ -6,7 +6,10 @@ const Option = Select.Option;
 const confirm = Modal.confirm;
 export const defaultEsearchConfig = {
 		header:"高德测试",
-    headMenu:[],//顶部菜单渲染数组
+    //顶部菜单渲染数组
+    headMenu:[],
+    //子节点类型 为空或treeNode 
+    renderChildType:"",
 		method:{
        // [ 可选 ] 菜单图标点击钩子 返回false 屏蔽切换展示功能
 			 menuClickHook(){
@@ -56,6 +59,10 @@ export const defaultEsearchConfig = {
             })
        }
 		},
+    //子节点获取会数据的函数 对应 renderChildType 字段 
+    callback:{
+      
+    },
     searchPanel:{
       type:"table",//表单展示类型  table|card
       search:[
@@ -75,7 +82,8 @@ export const defaultEsearchConfig = {
         //       message: 'Please input your name',
         //     }]
         //   }
-        // },{
+        // },
+        // {
         //   field:'caseNo1',
         //   type:"Input",
         //   label:"案件编号",
@@ -125,50 +133,52 @@ export const defaultEsearchConfig = {
         rowKey:"groupId"
       },
       // 表格列map数据，对应antd的表格 columns
-      tableColumns:[{
-        title: '部门名称',
-        align:"center",
-        dataIndex: 'deptName',
-        render: text => <a href="javascript:;">{text}</a>,
-        }, {
-          title: '分组名称',
-          align:"center",
-          dataIndex: 'groupName',
-        },{
-          title: '创建时间',
-          align:"center",
-          dataIndex: 'createTime',
-        }, {
-          title: '更新时间',
-          align:"center",
-          dataIndex: 'updateTime',
-        },{
-          title: '操作',
-          align:"center",
-          render: function(this:any,text, record, index){
-            return(
-              <Fragment>
-                <Button  
-                  style={{marginRight:"10px"}} 
-                  type="primary" 
-                  size="small" 
-                  onClick={this.props.method.showList.bind(this,record)}
-                >详情</Button>
-                <Button 
-                  style={{marginRight:"10px"}}  
-                  size="small"
-                  onClick={this.props.method.editList.bind(this,record)}
-                  >修改</Button>
-                <Button  
-                  style={{marginRight:"10px"}} 
-                  type="danger" 
-                  size="small"
-                   onClick={this.props.method.deleteList.bind(this,record)}
-                  >删除</Button>
-              </Fragment>
-            )
-          },
-        },],
+      tableColumns:[
+        // {
+        // title: '部门名称',
+        // align:"center",
+        // dataIndex: 'deptName',
+        // render: text => <a href="javascript:;">{text}</a>,
+        // }, {
+        //   title: '分组名称',
+        //   align:"center",
+        //   dataIndex: 'groupName',
+        // },{
+        //   title: '创建时间',
+        //   align:"center",
+        //   dataIndex: 'createTime',
+        // }, {
+        //   title: '更新时间',
+        //   align:"center",
+        //   dataIndex: 'updateTime',
+        // },{
+        //   title: '操作',
+        //   align:"center",
+        //   render: function(this:any,text, record, index){
+        //     return(
+        //       <Fragment>
+        //         <Button  
+        //           style={{marginRight:"10px"}} 
+        //           type="primary" 
+        //           size="small" 
+        //           onClick={this.props.method.showList.bind(this,record)}
+        //         >详情</Button>
+        //         <Button 
+        //           style={{marginRight:"10px"}}  
+        //           size="small"
+        //           onClick={this.props.method.editList.bind(this,record)}
+        //           >修改</Button>
+        //         <Button  
+        //           style={{marginRight:"10px"}} 
+        //           type="danger" 
+        //           size="small"
+        //            onClick={this.props.method.deleteList.bind(this,record)}
+        //           >删除</Button>
+        //       </Fragment>
+        //     )
+        //   },
+        // },
+        ],
       //对应antd的 pagination 配置
       pagination:{
         showSizeChanger:true,
@@ -177,16 +187,16 @@ export const defaultEsearchConfig = {
         currPage:1
       },
       cardHandleBtn:[
-        {
-          type:"primary",
-          text:"详情"
-        },{
-          type:"",
-          text:"修改"
-        },{
-          type:"danger",
-          text:"删除",
-        }
+        // {
+        //   type:"primary",
+        //   text:"详情"
+        // },{
+        //   type:"",
+        //   text:"修改"
+        // },{
+        //   type:"danger",
+        //   text:"删除",
+        // }
       ]
     },
     detailCofig:{

@@ -89,11 +89,11 @@ function EuploadHoc(loadConfig:Props){
           blob:async function(){
             const datas = new Blob([events]);
             fd.append(field,datas);
-            return await loadConfig.postFunction.stepTwo(`${uploadUrl.split(':')[2].substring(4)}?startPos=0&endPos=${datas.size}`,fd,configs);
+            return await loadConfig.postFunction.stepTwo(`${uploadUrl.substring(uploadUrl.indexOf("/szcg-base"))}?startPos=0&endPos=${datas.size}`,fd,configs);
           },
           formData:async function(){
             fd.append(field,events);
-            return await loadConfig.postFunction.stepTwo(uploadUrl.split(':')[2].substring(4),fd,configs);
+            return await loadConfig.postFunction.stepTwo(uploadUrl.substring(uploadUrl.indexOf("/szcg-base")),fd,configs);
           }
         }
         response= await method[type]();

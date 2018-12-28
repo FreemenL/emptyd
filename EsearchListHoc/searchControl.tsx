@@ -39,11 +39,14 @@ class Search extends Component<SearchControlProps,any>{
     this.inputLebgth = 0;
     this.Eform = Eform.bind(this);
   }
-  componentDidMount(){
-     this.props.handleEvent.getListData();
-  }
-  shouldComponentUpdate(nextProps,nextState){
 
+  componentDidMount(){
+    this.props.onRef(this)
+    const { renderChildType } = this.props;
+    renderChildType=="" && this.props.handleEvent.getListData();
+  }
+
+  shouldComponentUpdate(nextProps,nextState){
     const currentValue = this.props.form.getFieldsValue();
     const length = JSON.stringify(currentValue).length;
     if(this.props.state.searchState===nextProps.state.searchState&&length===this.inputLebgth){
@@ -57,8 +60,8 @@ class Search extends Component<SearchControlProps,any>{
   handleSearch(e){
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      if (!err) {
-          this.props.handleEvent.getListData(values);
+      if (!err){
+        this.props.handleEvent.getListData(values);
       }
     });
   }
@@ -71,6 +74,7 @@ class Search extends Component<SearchControlProps,any>{
     const SearchItem = this.Eform
     return this.props.searchPanel?(<SearchItem/>):null;
   }
+  
   render(){
     const listPanelMenuListClass = classNames(listSearchSection,{//筛选栏收展状态
       [`${styles['empty-search-section-show']}`]:!this.props.state.searchState,

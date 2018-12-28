@@ -22,6 +22,7 @@ const listPanelMenuBaseClass = styles['empty-search-panel-menu-operation-base'];
 
 class BadeSearch extends Component<Props,any>{
   EProxy
+  child
   constructor(props) {
     super(props);
     this.state={
@@ -33,6 +34,7 @@ class BadeSearch extends Component<Props,any>{
     this.EProxy = throttle(this.EventProxy.bind(this),700);
     this.EventProxy = this.EventProxy.bind(this);
     this.getListData = this.getListData.bind(this);
+    this.onRef = this.onRef.bind(this);
   }
   componentDidMount(){
     this.setState((prevState,props)=>{
@@ -49,7 +51,12 @@ class BadeSearch extends Component<Props,any>{
     const eventTarget = event.target.dataset["icon"];
     const { method :{ menuClickHook ,searchClickHook}} = this.props;
     const eventHandle = { menuList:menuClickHook,searchState:searchClickHook }
-    if(GetType(eventHandle[eventTarget])==="function"&&!eventHandle[eventTarget]()){
+    if(GetType(eventHandle[eventTarget])==="function"&&!eventHandle[eventTarget]()){ 
+      this.setState((prevState,props)=>{
+        return{
+          loading:false
+        }
+      })
       return false;
     }
     this.setState((prevState,props)=>{
@@ -62,6 +69,7 @@ class BadeSearch extends Component<Props,any>{
 
   @autobind
   iconClick(event){
+    this.child.handleReset();
     this.setState((prevState,props)=>{
       return{
         loading:true
@@ -73,7 +81,14 @@ class BadeSearch extends Component<Props,any>{
   }
 
   getListData(values?:any){
-    let getDatatimes = 0
+    const { renderChildType ,callback } = this.props;
+    callback[renderChildType]?
+    callback[renderChildType](values):
+    this.getTableData(values);
+  }
+
+  getTableData(values){
+    let getDatatimes = 0;
     const { ownAction , ApiConfig:{ listEffectParams } } = this.props;
     this.props.ownAction.forEach((item,index)=>{
       if(item["actionType"].endsWith("DATALIST") && getDatatimes<=1){
@@ -94,7 +109,11 @@ class BadeSearch extends Component<Props,any>{
       }
     })
   }
-  
+   
+  onRef(ref){
+    this.child = ref;
+  }
+
   render() {
     const listPanelMenuListClass = classNames(`${listPanelMenuBaseClass}`,{//筛选展示模式菜单图标
       [`${styles['empty-search-panel-menu-operation-list']} `]:this.state.menuList,
@@ -105,6 +124,7 @@ class BadeSearch extends Component<Props,any>{
       [`${styles['empty-search-panel-menu-operation-search-show']} `]:!this.state.searchState,
     });
     const menuLength = this.props.headMenu&&this.props.headMenu.length;
+     const { renderChildType } = this.props;
     return (
       <Spin spinning={this.state.loading} size="large">
         <div className={listPanelClass}>
@@ -121,14 +141,15 @@ class BadeSearch extends Component<Props,any>{
               const Menus=menu.bind(this)
               return <Menus key={index}/>
             })}
-            <span 
-              data-icon="menuList"
-              className={ listPanelMenuListClass }
-              onClick={this.iconClick}
-            />
+            {renderChildType.trim()==""?<span 
+                data-icon="menuList"
+                className={ listPanelMenuListClass }
+                onClick={this.iconClick}
+            />:null}
           </section>
         </div>
         {this.props.render(this.state,{
+          onRef:this.onRef,
           getListData:this.getListData,
           reload:this.getListData.bind(this)
         })}

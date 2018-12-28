@@ -122,10 +122,9 @@
       height:100%;
     };
     .ant-drawer-header{
-      width: 1397px;
+      width: 100%;
       margin: 0 auto;
       padding-right: 200px;
-      transform: translateX(11px);
     }
     .ant-drawer-content-wrapper{
       height: calc(~"100% - 64px") !important;
@@ -159,9 +158,17 @@
   margin-top: 64px !important;
   box-sizing: border-box;
   overflow-y: auto;
-  :global .ant-drawer-wrapper-body{
+  :global{
+    .ant-drawer-body{
+      padding-top:0px;
+    };
+    .ant-drawer-wrapper-body{
       background: #f5f5f5;
-  };
+    };
+    .ant-drawer-title{
+      padding-left:2px;
+    }
+  } 
   .@{empty-prefix}-hide-btn{
       position: absolute;
       width:14px;

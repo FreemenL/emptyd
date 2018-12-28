@@ -1,6 +1,6 @@
 import React ,{ Fragment }from 'react';
 import { method } from 'utils/tool';
-import { List,Card, Skeleton ,Icon , Button ,Spin} from 'antd';
+import { List,Card, Skeleton ,Icon , Button ,Spin ,Tooltip} from 'antd';
 
 //less
 import styles from './index.less';
@@ -11,6 +11,7 @@ const cardListClassName =`${styles['empty-card-list-wrapper']}`;
 const emptyCardListClassName =`${styles['empty-card-list']}`;
 const noMoreListClassName =`${styles['empty-card-list-nomore']}`;
 const loadListClassName =`${styles['empty-card-list-load']}`;
+const cardListContent = `${styles['empty-card-list-content']}`;
 //常量
 const { GetType } = method;
 
@@ -21,6 +22,7 @@ const generatorBtn = (target,btnGroup,RowData)=>{
     if(btnEvent!=="undefined"){
       return (<Button type={item.type} size="small" onClick={item.onClick.bind(target,RowData)}>{item.text}</Button>)
     }
+
     return new bindEvent(target,item,RowData)[itemType]();
   })
   return resBtn;
@@ -53,6 +55,7 @@ const CardTemplate = (function (this:any){
     let dataSource = [];
     let noMoreData = false;
     const { tableConfig,tableColumns,pagination ,cardHandleBtn} = this.props.listConfig;
+    console.log(this.props.listConfig);
     Object.keys(this.props.ownState).forEach((item,index)=>{
       if(item.endsWith("DATALIST")&&!this.props.ownState[item]["loading"]){
         const responseData = this.props.ownState[item]["response"];
@@ -83,38 +86,42 @@ const CardTemplate = (function (this:any){
     </div>
     ) : null;
     return (
-    <List
-      className={emptyCardListClassName}
-      itemLayout="horizontal"
-      dataSource={ dataSource }
-      loadMore={pagination.total?loadMore:false}
-      loading={loading}
-      grid={{ gutter: 16, xs: 1, sm: 1, md:2, lg: 2, xl: 3, xxl:4 }}
-      renderItem={item => (
-        <List.Item>
-            <Card 
-              bordered={true}
-              hoverable
-              actions={generatorBtn(this,cardHandleBtn,item)}
-              >
-               <ul className={cardListClassName}>
-                  {tableColumns.map((items,indexs)=>{
-                   return(
-                     <li key={`${items.dataIndex}${tableConfig["rowKey"]}`}>
-                        {typeof items.dataIndex=="undefined"?null:
-                         <Fragment>
-                           <span>{items.title}</span>
-                            {items.render?(<span>{items.render(item[items.dataIndex])}</span>):(<span>{item[items.dataIndex]}</span>)}
-                         </Fragment>
-                        } 
-                     </li>
-                    )
-                 })}
-               </ul>
-              </Card>
-        </List.Item>
-      )}
-    />
+      <div className={emptyCardListClassName} >
+        <List
+          itemLayout="horizontal"
+          dataSource={ dataSource }
+          loadMore={pagination.total?loadMore:false}
+          loading={loading}
+          grid={{ gutter: 16, xs: 1, sm: 1, md:2, lg: 2, xl: 3, xxl:4 }}
+          renderItem={item => (
+            <List.Item>
+                <Card 
+                  bordered={true}
+                  hoverable
+                  actions={generatorBtn(this,cardHandleBtn,item)}
+                  >
+                   <ul className={cardListClassName}>
+                      {tableColumns.map((items,indexs)=>{
+
+                       return(
+                         <li key={`${items.dataIndex}${tableConfig["rowKey"]}`}>
+                            {typeof items.dataIndex=="undefined"?null:
+                             <Fragment>
+                               <span>{items.title}</span>
+                                <Tooltip placement="right" title={item[items.dataIndex]}>
+                                  {items.render?(<span className={cardListContent}>{items.render(item[items.dataIndex])}</span>):(<span  className={cardListContent}>{item[items.dataIndex]}</span>)}
+                                </Tooltip>
+                             </Fragment>
+                            } 
+                         </li>
+                        )
+                     })}
+                   </ul>
+                  </Card>
+            </List.Item>
+          )}
+        />
+    </div>
   );
     }
 })()
