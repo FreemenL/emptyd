@@ -5,6 +5,5 @@
 `emptyd` 需要搭配`emptyd-admin-webpack`脚手架使用
 实现了基本的页面配置化  表单配置化
 
-# emptyd-admin-webpack 脚手架 v0.0.1
 
 
