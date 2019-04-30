@@ -10,4 +10,7 @@ npm install emptyd -S
 
 ```
 
+# future 
+改写样式书写方式
+
 
